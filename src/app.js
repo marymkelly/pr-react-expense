@@ -6,12 +6,13 @@ import configureStore from './store/configStore.js';
 import { addExpense } from './actions/expenses.js';
 import { setTextFilter } from './actions/filters.js';
 import getVisibleExpenses from './selectors/expenses.js';
-import 'react-dates/lib/css/_datepicker.css';
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
-
+import 'react-dates/lib/css/_datepicker.css';
 
 const store = configureStore();
+
+console.log('TESTING!!! PLEASE')
 
 store.dispatch(addExpense({description: 'Water Bill', amount: 4500}));
 store.dispatch(addExpense({description: 'Gas Bill', createdAt: 1000}));
@@ -24,6 +25,4 @@ const jsx = (
     
 )
 
-
-// ReactDOM.render(<AppRouter />, document.getElementById('app'))
 ReactDOM.render(jsx, document.getElementById('app'))
