@@ -1,17 +1,19 @@
 import React from 'react';
-import toJSON from 'enzyme-to-json';
+// import toJson from 'enzyme-to-json/serializer';
 import { shallow } from 'enzyme';
 import ExpenseForm from '../../components/pages/ExpenseForm';
 import expenses from '../fixtures/expenses'
 
 test('should render ExpenseForm corectly', () => {
     const wrapper = shallow(<ExpenseForm />)
-    expect(toJSON(wrapper)).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
+    // expect(toJson(wrapper)).toMatchSnapshot();
 })
 
 test('should render ExpenseForm corectly with expense data', () => {
     const wrapper = shallow(<ExpenseForm expense={expenses[1]} />)
-    expect(toJSON(wrapper)).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
+    // expect(toJson(wrapper)).toMatchSnapshot();
 })
 
 test('should render error for invalid input', () => {
@@ -20,7 +22,8 @@ test('should render error for invalid input', () => {
         preventDefault: () => {}
     })
     expect(wrapper.state('error').length).toBeGreaterThan(0);
-    expect(toJSON(wrapper)).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
+    // expect(toJson(wrapper)).toMatchSnapshot();
 })
 
 test('should set description on input change', () => {
@@ -30,7 +33,7 @@ test('should set description on input change', () => {
         target: { value }
     })
     expect(wrapper.state('description')).toBe(value);
-    // expect(toJSON(wrapper)).toMatchSnapshot();
+    // expect(toJson(wrapper)).toMatchSnapshot();
 })
 
 test('should set new note on textarea change', () => {
@@ -40,7 +43,7 @@ test('should set new note on textarea change', () => {
         target: { value }
     })
     expect(wrapper.state('note')).toBe(value);
-    // expect(toJSON(wrapper)).toMatchSnapshot();
+    // expect(toJson(wrapper)).toMatchSnapshot();
 })
 
 test('should set amount if valid input', () => {
@@ -50,7 +53,7 @@ test('should set amount if valid input', () => {
         target: { value }
     })
     expect(wrapper.state('amount')).toBe(value);
-    // expect(toJSON(wrapper)).toMatchSnapshot();
+    // expect(toJson(wrapper)).toMatchSnapshot();
 })
 
 test('should not set amount if invalid input', () => {
@@ -60,7 +63,7 @@ test('should not set amount if invalid input', () => {
         target: { value }
     })
     expect(wrapper.state('amount')).toBe('');
-    // expect(toJSON(wrapper)).toMatchSnapshot();
+    // expect(toJson(wrapper)).toMatchSnapshot();
 })
 
 test('should call onSubmit prop for valid form submission', () => {
