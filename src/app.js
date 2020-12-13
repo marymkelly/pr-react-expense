@@ -10,11 +10,11 @@ import 'normalize.css/normalize.css';
 import './styles/styles.scss';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
+import './firebase/firebase.js';
+// import './playground/promises.js'
 
 
 const store = configureStore();
-
-console.log('TESTING');
 
 const jsx = (
     <Provider store={store}>
