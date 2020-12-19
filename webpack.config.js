@@ -15,7 +15,7 @@ module.exports = (env) => {
     console.log('env', env)
     const isProduction = (env === 'production');
     return {    
-        entry: './src/app.js',
+        entry: ['@babel/polyfill', './src/app.js'],
         output: {
             path: path.join(__dirname, 'public', 'dist'),
             filename: 'bundle.js'
@@ -47,18 +47,49 @@ module.exports = (env) => {
                     {
                         loader: 'css-loader',
                         options: {
+                            sourceMap: true,
+                            url: false,
+                        }
+                    }, {
+                        loader: 'resolve-url-loader',
+                        options: {
                             sourceMap: true
                         }
                     },
                     {
                         loader: 'sass-loader',
                         options: {
-                            sourceMap: true
+                            sourceMap: true,
                         }
                     }
                 ]
-            }]
-        },
+            },
+            {
+                test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
+                use: [{
+                    loader: "url-loader",
+                    options: {
+                      limit: 8192,
+                    }
+                },
+                    {
+                      loader: 'file-loader',
+                    //   options: {
+                    //     publicPath: '/img/'
+                    //   }
+                    }
+                ],
+            }
+        ]
+        }, 
+        resolve: {
+             alias: {
+              '/img/bg.jpg': path.resolve(
+                __dirname,
+                'public/img/bg.jpg'
+              ),
+            },
+          },
         mode: isProduction ? 'production' : 'development',
         devtool: isProduction ? 'source-map' : 'inline-source-map',
         devServer: {
